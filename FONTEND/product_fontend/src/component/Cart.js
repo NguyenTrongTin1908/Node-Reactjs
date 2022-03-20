@@ -8,6 +8,7 @@ class Cart extends Component {
     super(props);
   }
   componentWillMount() {
+    console.log("prop trong cart la ", this.props.subtotal);
     // let ListCart = [];
     // let TotalCart = 0;
     // this.props.item.map((element, index) => {
@@ -115,7 +116,7 @@ class Cart extends Component {
                     <li>
                       Subtotal{" "}
                       <span className="all_sub" name="total">
-                        {/* &lt;%=subtotal%&gt;{" "} */}
+                        {this.props.subtotal}
                       </span>
                     </li>
                     <li>
@@ -138,7 +139,7 @@ class Cart extends Component {
               <div className="col-lg-6">
                 <div className="shoping__continue">
                   <div className="shoping__discount">
-                    <h5>Discount Codes</h5>
+                    {/* <h5>Discount Codes</h5>
                     <form action="/add-coupon" method="POST">
                       <input
                         type="text"
@@ -149,7 +150,7 @@ class Cart extends Component {
                       <button type="submit" className="site-btn">
                         APPLY COUPON
                       </button>
-                    </form>
+                    </form> */}
                   </div>
                 </div>
               </div>

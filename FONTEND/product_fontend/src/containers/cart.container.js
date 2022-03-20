@@ -24,18 +24,23 @@ class CartContainer extends React.Component {
   }
 
   componentWillMount() {
-    // this.props.cartActions.getData();
+    this.props.data.cartStore.map((element, index) => {
+      this.props.data.subtotal += element.price * element.quantity;
+    });
   }
 
   render() {
     const session = getSessionStorageOrDefault("cart", "cart");
-    console.log("SE la ", session);
+
     const data = this.props;
-    console.log("data dime la : ", this.props.data);
-    if (data != null) {
+
+    if (data != null && this.props.data.subtotal != 0) {
       return (
         <div>
-          <Cart dataCart={this.props.data} />
+          <Cart
+            dataCart={this.props.data}
+            subtotal={this.props.data.subtotal}
+          />
         </div>
       );
     } else {

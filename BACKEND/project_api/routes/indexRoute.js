@@ -33,7 +33,6 @@ router.get("/getdatamongodb", async (req, res) => {
   });
 
   res.send(data);
-  console.log("DaTA :", data);
 
   //console.log(session.cart);
 });

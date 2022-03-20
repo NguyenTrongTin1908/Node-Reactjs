@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class Checkout extends Component {
   render() {
     return (
-        <section className="checkout spad">
+      <section className="checkout spad">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h6><span className="icon_tag_alt" /> Have a coupon? <a href="/shoping-cart">Click here</a> to enter your code
+              <h6>
+                <span className="icon_tag_alt" /> Have a coupon?{" "}
+                <a href="/shoping-cart">Click here</a> to enter your code
               </h6>
             </div>
           </div>
@@ -19,14 +21,26 @@ export default class Checkout extends Component {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="checkout__input">
-                        <p>Fist Name<span>*</span></p>
-                        <input type="text" name="first_name" className="first_name" />
+                        <p>
+                          Fist Name<span>*</span>
+                        </p>
+                        <input
+                          type="text"
+                          name="first_name"
+                          className="first_name"
+                        />
                       </div>
                     </div>
                     <div className="col-lg-6">
                       <div className="checkout__input">
-                        <p>Last Name<span>*</span></p>
-                        <input type="text" name="last_name" className="last_name" />
+                        <p>
+                          Last Name<span>*</span>
+                        </p>
+                        <input
+                          type="text"
+                          name="last_name"
+                          className="last_name"
+                        />
                       </div>
                     </div>
                   </div>
@@ -35,9 +49,21 @@ export default class Checkout extends Component {
                                 <input type="text">
                             </div> */}
                   <div className="checkout__input">
-                    <p>Address<span>*</span></p>
-                    <input type="text" placeholder="Street Address" className="checkout__input__add" name="street_address" />
-                    <input type="text" placeholder="Apartment, suite, unite ect (optinal)" name="apartment_address" className="apartment_address" />
+                    <p>
+                      Address<span>*</span>
+                    </p>
+                    <input
+                      type="text"
+                      placeholder="Street Address"
+                      className="checkout__input__add"
+                      name="street_address"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Apartment, suite, unite ect (optinal)"
+                      name="apartment_address"
+                      className="apartment_address"
+                    />
                   </div>
                   {/* <div class="checkout__input">
                                 <p>Town/City<span>*</span></p>
@@ -54,13 +80,17 @@ export default class Checkout extends Component {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="checkout__input">
-                        <p>Phone<span>*</span></p>
+                        <p>
+                          Phone<span>*</span>
+                        </p>
                         <input type="text" name="phone" className="phone" />
                       </div>
                     </div>
                     <div className="col-lg-6">
                       <div className="checkout__input">
-                        <p>Email<span>*</span></p>
+                        <p>
+                          Email<span>*</span>
+                        </p>
                         <input type="text" name="email" className="email" />
                       </div>
                     </div>
@@ -80,7 +110,7 @@ export default class Checkout extends Component {
                             </div> */}
                 </div>
                 <div className="col-lg-4 col-md-6">
-                  <div className="checkout__order">
+                  {/* <div className="checkout__order">
                     <h4>Your Order</h4>
                     <div className="checkout__order__products">Products <span>Total</span></div>
                     &lt;%  
@@ -114,17 +144,18 @@ export default class Checkout extends Component {
                                         <span class="checkmark"></span>
                                     </label>
                                 </div> */}
-                    {/* <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
+                  {/* <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
                                     ut labore et dolore magna aliqua.</p> */}
-                    <button type="submit" className="site-btn">PLACE ORDER</button>
-                  </div>
+                  <button type="submit" className="site-btn">
+                    PLACE ORDER
+                  </button>
+                  {/* </div>  */}
                 </div>
               </div>
             </form>
           </div>
         </div>
       </section>
-      
-    )
+    );
   }
 }

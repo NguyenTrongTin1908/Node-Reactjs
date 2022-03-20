@@ -4,6 +4,8 @@ import { combineReducers } from "redux";
 const InitialState = {
   numberCart: 0,
   cartStore: [],
+  subtotal: 0,
+  discount: 0,
 };
 
 const cart = (state = InitialState, action) => {
