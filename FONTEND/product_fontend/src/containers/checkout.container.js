@@ -21,7 +21,10 @@ class CheckoutContainer extends React.Component {
     super(props);
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.props.data.total =
+      (this.props.data.subtotal * (100 - this.props.data.discount)) / 100;
+  }
 
   render() {
     const session = getSessionStorageOrDefault("cart", "cart");
@@ -29,11 +32,18 @@ class CheckoutContainer extends React.Component {
     // const data = this.props;
     // console.log("data dime la : ", this.props.data);
     // if (data != null) {
-    return (
-      <div>
-        <Checkout />
-      </div>
-    );
+    if (this.props.data.total != 0) {
+      return (
+        <div>
+          <Checkout
+            dataCart={this.props.data}
+            subtotal={this.props.data.subtotal}
+            total={this.props.data.total}
+            discount={this.props.data.discount}
+          />
+        </div>
+      );
+    } else return <div></div>;
   }
 }
 

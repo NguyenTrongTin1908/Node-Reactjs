@@ -40,6 +40,7 @@ class CartContainer extends React.Component {
           <Cart
             dataCart={this.props.data}
             subtotal={this.props.data.subtotal}
+            discount={this.props.data.discount}
           />
         </div>
       );

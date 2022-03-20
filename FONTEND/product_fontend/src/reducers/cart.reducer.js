@@ -6,6 +6,8 @@ const InitialState = {
   cartStore: [],
   subtotal: 0,
   discount: 0,
+  total: 0,
+  discount: 20,
 };
 
 const cart = (state = InitialState, action) => {

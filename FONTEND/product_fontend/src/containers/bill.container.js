@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import axios from "axios";
-import Home from "../component/Home";
-import * as homeActions from "../actions/home.action";
+import Bill from "../component/Bill";
 import Loading from "../component/loading/loading";
 import { sortTypes } from "../constants/action.types";
 import localStore from "../config/storage.config";
@@ -18,13 +17,13 @@ function getSessionStorageOrDefault(key, defaultValue) {
   return JSON.parse(stored);
 }
 
-class HomeContainer extends React.Component {
+class BillContainer extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentWillMount() {
-    this.props.homeActions.getData();
+    // this.props.homeActions.getData();
   }
 
   render() {
@@ -35,7 +34,12 @@ class HomeContainer extends React.Component {
     if (data != null) {
       return (
         <div>
-          <Home dataLoad={this.props.data} />
+          <Bill
+            dataCart={this.props.data}
+            subtotal={this.props.data.subtotal}
+            total={this.props.data.total}
+            discount={this.props.data.discount}
+          />
         </div>
       );
     } else {
@@ -44,12 +48,12 @@ class HomeContainer extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
-  data: state.homeReducers.food.data,
+  data: state.cartReducers.cart,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    homeActions: bindActionCreators(homeActions, dispatch),
+    // homeActions: bindActionCreators(homeActions, dispatch),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(BillContainer);
