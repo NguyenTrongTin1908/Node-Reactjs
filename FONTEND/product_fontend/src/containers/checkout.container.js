@@ -27,12 +27,13 @@ class CheckoutContainer extends React.Component {
   }
 
   render() {
-    const session = getSessionStorageOrDefault("cart", "cart");
+    const session = getSessionStorageOrDefault("dataCart", "cart");
     console.log("SE la ", session);
     // const data = this.props;
     // console.log("data dime la : ", this.props.data);
     // if (data != null) {
     if (this.props.data.total != 0) {
+      sessionStorage.setItem("dataCart", JSON.stringify(this.props.data));
       return (
         <div>
           <Checkout

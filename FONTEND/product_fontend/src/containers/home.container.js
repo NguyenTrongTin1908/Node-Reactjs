@@ -24,7 +24,6 @@ class HomeContainer extends React.Component {
   }
 
   componentWillMount() {
-    console.log("ID HOME LA ", this.props);
     this.props.homeActions.getData();
   }
 
@@ -34,6 +33,8 @@ class HomeContainer extends React.Component {
     const data = this.props;
 
     if (data != null) {
+      sessionStorage.setItem("dataProduct", JSON.stringify(data));
+      console.log("ID HOME LA ", this.props);
       return (
         <div>
           <Home dataLoad={data.data} />

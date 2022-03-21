@@ -114,7 +114,7 @@ class Home extends Component {
                       </div>
                       <div className="featured__item__text">
                         <h6>
-                          <a href={"detail" + element._id}>{element.tensp}</a>
+                          <a href={"detail/" + element._id}>{element.tensp}</a>
                         </h6>
                         <h5>{element.gia}</h5>
                       </div>

@@ -30,11 +30,13 @@ class CartContainer extends React.Component {
   }
 
   render() {
-    const session = getSessionStorageOrDefault("cart", "cart");
+    const session = getSessionStorageOrDefault("dataProduct", "cart");
+    console.log("session la ", session);
 
     const data = this.props;
 
     if (data != null && this.props.data.subtotal != 0) {
+      sessionStorage.setItem("dataCart", JSON.stringify(this.props.data));
       return (
         <div>
           <Cart

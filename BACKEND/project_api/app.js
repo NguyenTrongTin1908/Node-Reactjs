@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { indexRoute } from "./routes/indexRoute.js";
 import { detailRoute } from "./routes/detailRoute.js";
+import { userRoute } from "./routes/usersRoute.js";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -26,5 +27,6 @@ app.listen(4000);
 
 app.use("/", indexRoute);
 app.use("/detail", detailRoute);
+app.use("/user", userRoute);
 
 export { app };

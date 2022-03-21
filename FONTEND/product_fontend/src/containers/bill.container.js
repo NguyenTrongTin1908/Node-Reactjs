@@ -27,7 +27,7 @@ class BillContainer extends React.Component {
   }
 
   render() {
-    const session = getSessionStorageOrDefault("cart", "cart");
+    const session = getSessionStorageOrDefault("dataCart", "cart");
     console.log("SE la ", session);
     const data = this.props;
     console.log("data dime la : ", this.props.data);

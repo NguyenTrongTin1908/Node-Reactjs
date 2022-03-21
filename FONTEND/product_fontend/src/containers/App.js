@@ -6,6 +6,7 @@ import CheckoutContainer from "./checkout.container";
 import BillContainer from "./bill.container";
 import DetailContainer from "./detail.container";
 import AboutContainer from "./about.container";
+import LoginContainer from "./login.container";
 
 const App = () => (
   <Router>
@@ -16,6 +17,7 @@ const App = () => (
       <Route exact path="/bill" element={<BillContainer />} />
       <Route exact path="/about" element={<AboutContainer />} />
       <Route path="/detail/:id" element={<DetailContainer />} />
+      <Route path="/login" element={<LoginContainer />} />
     </Routes>
   </Router>
 );

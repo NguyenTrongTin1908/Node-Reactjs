@@ -5,7 +5,7 @@ export default class Footer extends Component {
     return (
       <div>
         {/* Banner Begin */}
-        <div className="banner">
+        {/* <div className="banner">
           <div className="container">
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-6">
@@ -20,10 +20,10 @@ export default class Footer extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* Banner End */}
         {/* Latest Product Section Begin */}
-        <section className="latest-product spad">
+        {/* <section className="latest-product spad">
           <div className="container">
             <div className="row">
               <div className="col-lg-4 col-md-6">
@@ -144,7 +144,7 @@ export default class Footer extends Component {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* Latest Product Section End */}
         {/* Blog Section Begin */}
         <section className="from-blog spad">

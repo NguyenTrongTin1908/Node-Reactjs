@@ -60,3 +60,17 @@ export const addNewHobby = (product) => {
     payload: product,
   };
 };
+
+export const Login = (id) => async (dispatch, getState) => {
+  axios
+    .post("http://localhost:4000/signin", {
+      email: this.state.email,
+      password: this.state.password,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
