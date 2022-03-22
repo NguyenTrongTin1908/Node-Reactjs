@@ -1,10 +1,20 @@
-let express = require("express");
-let router = express.Router();
-let userController = require("../controller/userController");
+"use strict";
+import express from "express";
+import { Router } from "express";
+import cors from "cors";
+// const mongodb = require('mongoose');
+import mongodb from "mongoose";
+const router = express.Router();
+// const DB_MONGO = require('./app/config/db.config')
+import("dotenv/config");
 
-const user_router = express.Router();
+import { ObjectId } from "mongodb";
+
+import userController from "../controller/userController.js";
+
+const userRoute = express.Router();
 
 /* GET users listing. */
 router.post("/login", userController.handleLogin);
 
-module.exports = user_router;
+export { router as userRoute };
