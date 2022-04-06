@@ -9,7 +9,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
-app.listen(4000);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
@@ -25,8 +24,11 @@ app.listen(4000);
 //   res.render('error');
 // });
 
-app.use("/", indexRoute);
-app.use("/detail", detailRoute);
-app.use("/user", userRoute);
+// userRoute(app);
+// detailRoute(app);
+
+indexRoute(app);
+
+app.listen(4000);
 
 export { app };

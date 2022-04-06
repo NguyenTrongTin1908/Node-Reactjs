@@ -40,62 +40,66 @@ class Cart extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.dataCart.cartStore.map((element, index) => {
-                        console.log("THIS PROPS", element);
-                        return (
-                          <tr className="shoping_tr">
-                            <td
-                              className="shoping__cart__item"
-                              // field="updates_<%=e.item.tensp %>"
-                              // name="item_<%=id%>"
-                            >
-                              <img
-                                // style={{ width: "100px" }}
-                                // src="images/<%=e.item.maloaisp%>/<%=e.item.fileanh%>"
-                                alt=""
-                              />
-                              <h5>{element.name}</h5>
-                            </td>
-                            <td className="shoping__cart__price">
-                              <div
-                              // className="price_updates_<%=e.item._id %>"
-                              // name="price_<%=id%>"
+                      {this.props.dataCart ? (
+                        this.props.dataCart.cartStore.map((element, index) => {
+                          console.log("THIS PROPS", element);
+                          return (
+                            <tr className="shoping_tr">
+                              <td
+                                className="shoping__cart__item"
+                                // field="updates_<%=e.item.tensp %>"
+                                // name="item_<%=id%>"
                               >
-                                {element.price}
-                              </div>
-                            </td>
-                            <td className="shoping__cart__quantity">
-                              <div className="quantity">
+                                <img
+                                  // style={{ width: "100px" }}
+                                  // src="images/<%=e.item.maloaisp%>/<%=e.item.fileanh%>"
+                                  alt=""
+                                />
+                                <h5>{element.name}</h5>
+                              </td>
+                              <td className="shoping__cart__price">
                                 <div
-                                  className="pro-qty"
-                                  id="bt_update"
-                                  field={"updates_" + element.id}
+                                // className="price_updates_<%=e.item._id %>"
+                                // name="price_<%=id%>"
                                 >
-                                  <input
-                                    type="text"
-                                    name="y"
-                                    defaultValue={element.quantity}
-                                    // className="qty_updates_<%=e.item._id %>"
-                                    // field="updates_<%=e.item._id %>"
-                                  />
+                                  {element.price}
                                 </div>
-                              </div>
-                            </td>
-                            <td className="shoping__cart__total">
-                              <div
-                                className={"total_updates_" + element.id}
-                                id={element.id}
-                                name={"total_" + element.id}
-                              >
-                                {element.price * element.quantity}
-                              </div>
-                            </td>
-                            <td className="shoping__cart__item__close">
-                              <span className="icon_close" />
-                            </td>
-                          </tr>
-                        );
-                      })}
+                              </td>
+                              <td className="shoping__cart__quantity">
+                                <div className="quantity">
+                                  <div
+                                    className="pro-qty"
+                                    id="bt_update"
+                                    field={"updates_" + element.id}
+                                  >
+                                    <input
+                                      type="text"
+                                      name="y"
+                                      defaultValue={element.quantity}
+                                      // className="qty_updates_<%=e.item._id %>"
+                                      // field="updates_<%=e.item._id %>"
+                                    />
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="shoping__cart__total">
+                                <div
+                                  className={"total_updates_" + element.id}
+                                  id={element.id}
+                                  name={"total_" + element.id}
+                                >
+                                  {element.price * element.quantity}
+                                </div>
+                              </td>
+                              <td className="shoping__cart__item__close">
+                                <span className="icon_close" />
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <div></div>
+                      )}
                     </tbody>
                   </table>
                   ;

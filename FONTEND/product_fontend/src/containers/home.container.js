@@ -31,13 +31,13 @@ class HomeContainer extends React.Component {
     // const session = getSessionStorageOrDefault("cart", "cart");
     // console.log("SE la ", session);
     const data = this.props;
+    sessionStorage.setItem("dataProduct", JSON.stringify(data));
+    const userSession = getSessionStorageOrDefault("dataUser", "cart");
 
-    if (data != null) {
-      sessionStorage.setItem("dataProduct", JSON.stringify(data));
-      console.log("ID HOME LA ", this.props);
+    if (data != null && userSession != null) {
       return (
         <div>
-          <Home dataLoad={data.data} />
+          <Home dataLoad={data.data} userSession={userSession} />
         </div>
       );
     } else {

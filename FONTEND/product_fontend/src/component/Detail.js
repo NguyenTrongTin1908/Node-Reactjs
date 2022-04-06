@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 // import Section from "./Section";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { sortTypes } from "../constants/action.types";
+
+import { AddCart } from "../actions/cart.action";
 import Header from "./Header";
 
 class Detail extends Component {
@@ -8,13 +13,19 @@ class Detail extends Component {
   }
 
   render() {
+    const AddtoCart = (element) => {
+      alert("Đã thêm vào giỏ hàng");
+      this.props.AddCart(element);
+    };
     return (
       <div>
         <Header />
 
         <section class="product-details spad">
           {this.props.data.map((element, index) => {
-            console.log("ten sp la : ", element.tensp);
+            console.log(" sp la : ", element);
+            const file = `../file/public/images/${element.maloaisp}/${element.fileanh}`;
+            console.log(file);
             return (
               <div class="container">
                 <div class="row">
@@ -22,35 +33,28 @@ class Detail extends Component {
                     <div class="product__details__pic">
                       <div class="product__details__pic__item">
                         <div className="blog__item__pic">
-                          <img src="img/blog/blog-1.jpg" alt="" />
+                          <img
+                            src={
+                              require(`../file/public/images/${element.maloaisp}/${element.fileanh}`)
+                                .default
+                            }
+                            alt=""
+                          />
                         </div>
-                        <img
+                        {/* <img
                           class="product__details__pic__item--large"
-                          src="img/product/details/product-details-2.jpg"
+                          src={
+                            require(`../file/public/images/${element.maloaisp}/${element.fileanh}`)
+                              .default
+                          }
                           alt=""
-                        />
+                        /> */}
                       </div>
                       <div class="product__details__pic__slider owl-carousel">
-                        <img
-                          data-imgbigurl="img/product/details/product-details-2.jpg"
-                          src="img/product/details/product-details-2.jpg"
-                          alt=""
-                        />
-                        <img
-                          data-imgbigurl="img/product/details/product-details-3.jpg"
-                          src="img/product/details/product-details-2.jpg"
-                          alt=""
-                        />
-                        <img
-                          data-imgbigurl="img/product/details/product-details-5.jpg"
-                          src="img/product/details/product-details-2.jpg"
-                          alt=""
-                        />
-                        <img
-                          data-imgbigurl="img/blog/blog-1.jpg"
-                          src="img/blog/blog-1.jpg"
-                          alt=""
-                        />
+                        <img data-imgbigurl={file} src={file} alt="" />
+                        <img data-imgbigurl={file} src={file} alt="" />
+                        <img data-imgbigurl={file} src={file} alt="" />
+                        <img data-imgbigurl={file} src={file} alt="" />
                       </div>
                     </div>
                   </div>
@@ -67,29 +71,30 @@ class Detail extends Component {
                       </div>
                       <div class="product__details__price">
                         {" "}
-                        {/* {element.gia}VNĐ */}
+                        {element.gia}VNĐ
                       </div>
-                      {/* <p>{element.chitiet}</p> */}
-                      <form
-                        method="get"
-                        // action={"/add-to-cart?/id=" + element._id}
-                      >
-                        <div class="product__details__quantity">
-                          <div class="quantity">
-                            <div class="pro-qty">
-                              <input name="sl" type="text" value="1" />
-                            </div>
+                      <p>{element.chitiet}</p>
+
+                      <div class="product__details__quantity">
+                        <div class="quantity">
+                          <div class="pro-qty">
+                            <input name="sl" type="text" value="1" />
                           </div>
                         </div>
-                        <button class="primary-btn" style={{ border: "none" }}>
-                          ADD TO CARD
-                        </button>
-                        <input
-                          style={{ visibility: "hidden" }}
-                          name="id"
-                          // value={element._id}
-                        />
-                      </form>
+                      </div>
+                      <button
+                        class="primary-btn"
+                        style={{ border: "none" }}
+                        onClick={() => AddtoCart(element)}
+                      >
+                        ADD TO CARD
+                      </button>
+                      <input
+                        style={{ visibility: "hidden" }}
+                        name="id"
+                        // value={element._id}
+                      />
+
                       <ul>
                         <li>
                           <b>Availability</b> <span>In Stock</span>
@@ -273,4 +278,15 @@ class Detail extends Component {
     );
   }
 }
-export default Detail;
+const mapStateToProps = (state) => ({
+  data: state.cartReducers.cart.cartStore,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // AddCart: (item) => dispatch(AddCart(item)),
+
+    AddCart: (item) => dispatch(AddCart(item)),
+  };
+};
+export default connect(null, mapDispatchToProps)(Detail);

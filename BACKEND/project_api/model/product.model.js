@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import mongoosePaginate from 'mongoose-paginate-v2'
+import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 const productSchema = mongoose.Schema({
   tensp: {
     type: String,
@@ -75,6 +75,6 @@ const productSchema = mongoose.Schema({
   },
 });
 productSchema.plugin(mongoosePaginate);
-const productModel =mongoose.model('product', productSchema)
-export {productModel} ;
+const productModel = mongoose.model("sanpham", productSchema);
+export { productModel };
 // sub :         table nè : name title, json (schema);

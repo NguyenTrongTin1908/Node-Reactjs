@@ -1,5 +1,10 @@
+import "../file/public/css/bootstrap.min.css";
+import "../file/public/css/font-awesome.min.css";
+import "../file/public/css/elegant-icons.css";
+import "../file/public/css/nice-select.css";
+import "../file/public/css/slicknav.min.css";
+import "../file/public/css/style.css";
 import React, { Component } from "react";
-
 import { BrowserRouter as Router, Route, useParams } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import axios from "axios";
@@ -7,8 +12,8 @@ import Detail from "../component/Detail";
 // import * as homeActions from "../actions/home.action";
 import { addNewHobby, getDetailProduct } from "../actions/home.action";
 import Loading from "../component/loading/loading";
-import { sortTypes } from "../constants/action.types";
-import localStore from "../config/storage.config";
+// import { sortTypes } from "../constants/action.types";
+// import localStore from "../config/storage.config";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,6 +21,8 @@ const DetailContainer = (props) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   let deta = useSelector((state) => state.homeReducers.detail.data);
+
+  let tin = "1";
 
   useLayoutEffect(() => {
     dispatch(getDetailProduct(id));

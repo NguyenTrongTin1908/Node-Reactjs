@@ -9,7 +9,7 @@ export const getData = () => async (dispatch, getState) => {
   let res;
   console.log("Day LA KQ Trong detail ");
   try {
-    res = await axios.get("http://localhost:4000/getdatamongodb");
+    res = await axios.get("http://localhost:4000/allProduct");
   } catch (err) {
     return err;
   }
@@ -26,14 +26,32 @@ export const getDetailProduct = (id) => async (dispatch, getState) => {
   let res;
   // let id = "621cc3770e2e414294d12001";
   try {
-    res = await axios.get(
-      "http://localhost:4000/detail/getdetailProduct/" + id
-    );
+    res = await axios.get("http://localhost:4000/product/" + id);
   } catch (err) {
     return err;
   }
 
   dispatch(setDetailProduct(res.data));
+};
+
+const setResultSearch = (data) => ({
+  type: homeTypes.SET_DATA_SEARCH,
+  payload: data,
+});
+
+export const searchProduct = (searchKey) => async (dispatch, getState) => {
+  let res;
+
+  console.log("searchKey la ", searchKey);
+  try {
+    res = await axios.get(
+      "http://localhost:4000/searchProduct?searchKey=" + searchKey.filter
+    );
+  } catch (err) {
+    return err;
+  }
+
+  dispatch(setResultSearch(res.data));
 };
 
 // export const getDetailProduct = (id) => {
@@ -53,19 +71,13 @@ export const getDetailProduct = (id) => async (dispatch, getState) => {
 //   console.log("Day LA KQ Trong detail ");
 // };
 
-export const addNewHobby = (product) => {
-  // console.log("Day LA KQ Trong detail ");
-  return {
-    type: homeTypes.SET_HOBBY,
-    payload: product,
-  };
-};
-
-export const Login = (id) => async (dispatch, getState) => {
+export const actionLogin = (email, password) => async (dispatch, getState) => {
   axios
-    .post("http://localhost:4000/signin", {
-      email: this.state.email,
-      password: this.state.password,
+    .post("http://localhost:4000/user/login", {
+      // email: this.state.email,
+      // password: this.state.password,
+      email,
+      password,
     })
     .then(function (response) {
       console.log(response);

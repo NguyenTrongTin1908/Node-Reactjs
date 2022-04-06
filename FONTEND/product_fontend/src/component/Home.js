@@ -17,51 +17,61 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header />
+        {this.props.userSession ? (
+          <Header userSession={this.props.userSession} />
+        ) : (
+          <Header userSession={null} />
+        )}
 
         <section className="categories">
           <div className="container">
             <div className="row">
               <div class="categories__slider owl-carousel">
-                {this.props.dataLoad.map((element, index) => {
-                  let filename = "/public/images/";
-                  let namesp = element.fileanh;
-                  var foder = element.maloaisp + "/";
-                  filename = filename + foder + namesp;
-                  var phantramgiamgia = element.phantram;
+                {this.props.dataLoad ? (
+                  this.props.dataLoad.map((element, index) => {
+                    let filename = "/public/images/";
+                    let namesp = element.fileanh;
+                    var foder = element.maloaisp + "/";
+                    filename = filename + foder + namesp;
+                    var phantramgiamgia = element.phantram;
 
-                  return (
-                    <div class="col-lg-3">
-                      <div class="product__discount__item">
-                        <div
-                          class="product__discount__item__pic set-bg"
-                          style={{ backgroundImage: "url(" + filename + ")" }}
-                        >
-                          <div class="product__discount__percent">
-                            {phantramgiamgia}
+                    return (
+                      <div class="col-lg-3">
+                        <div class="product__discount__item">
+                          <div
+                            class="product__discount__item__pic set-bg"
+                            style={{ backgroundImage: "url(" + filename + ")" }}
+                          >
+                            <div class="product__discount__percent">
+                              {phantramgiamgia}
+                            </div>
+                            <ul class="product__item__pic__hover">
+                              <li>
+                                <span
+                                  onClick={() => this.props.AddCart(element)}
+                                >
+                                  <i className="fa fa-shopping-cart" />
+                                </span>
+                              </li>
+                            </ul>
                           </div>
-                          <ul class="product__item__pic__hover">
-                            <li>
-                              <span onClick={() => this.props.AddCart(element)}>
-                                <i className="fa fa-shopping-cart" />
-                              </span>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="product__discount__item__text">
-                          <span>{element.chitiet}</span>
-                          <h5 style={{ fontSize: `17px` }}>
-                            <a href={"/details/" + element._id}></a>
-                          </h5>
+                          <div class="product__discount__item__text" id="CC">
+                            <span>{element.chitiet}</span>
+                            <h5 style={{ fontSize: `17px` }}>
+                              <a href={"/details/" + element._id}></a>
+                            </h5>
 
-                          <div class="product__item__price">
-                            <span>element.gia</span>
+                            <div class="product__item__price">
+                              <span>element.gia</span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
           </div>
@@ -80,7 +90,9 @@ class Home extends Component {
                     <li className="active" data-filter="*">
                       All
                     </li>
-                    <li data-filter=".oranges">Oranges</li>
+                    <li data-filter=".oranges" id="CC">
+                      Oranges
+                    </li>
                     <li data-filter=".fresh-meat">Fresh Meat</li>
                     <li data-filter=".vegetables">Vegetables</li>
                     <li data-filter=".fastfood">Fastfood</li>
@@ -128,6 +140,10 @@ class Home extends Component {
         {/* Featured Section End */}
         <Footer />
         {/* Blog Section End */}
+
+        <script>
+          let elm=document.getElementById("CC") elm.style.color="#0174DF"
+        </script>
       </div>
     );
   }

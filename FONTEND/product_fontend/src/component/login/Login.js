@@ -1,105 +1,166 @@
 import React, { Component } from "react";
+
+import { useState, useEffect, useLayoutEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./Login.css";
 import Footer from "../Footer";
+import axios from "axios";
+import { Redirect, withRouter } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-    };
-  }
-  handleEmailChange = (event) => {
-    this.setState({ email: event.target.value });
-  };
-  handlePasswordChange = (event) => {
-    this.setState({ password: event.target.value });
+const Login = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [values, setValue] = useState({
+    email: "",
+    password: "",
+    errMess: "",
+  });
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     redirect: true,
+  //     email: "",
+  //     password: "",
+  //     errMess: "",
+
+  //     // this.delta = this.delta.bind(this);
+  //   };
+  //   // this.errMess = this.errMess.bind(this);
+  // }
+
+  const handleEmailChange = (event) => {
+    event.persist();
+    setValue((values) => ({
+      ...values,
+      email: event.target.value,
+    }));
   };
 
-  handleLogin = () => {
-    alert(this.state.email);
+  const handlePasswordChange = (event) => {
+    event.persist();
+    setValue((values) => ({
+      ...values,
+      password: event.target.value,
+    }));
+
+    // console.log("state la: ", values);
   };
-  render() {
-    return (
-      <div>
-        <div className="container">
-          <div
-            id="loginbox"
-            className="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"
-          >
-            <div className="row">
-              <div className="col-sm-12" style={{ marginTop: "8em" }}>
-                <a href="/">
-                  <img src="img/logo.png" />
-                </a>
-              </div>
-              {/* <div class="iconmelon">
-        <svg viewBox="0 0 32 32">
-          <g filter="">
-               
-            <use xlink:href="#git "></use>
-          </g>
-        </svg>
-      </div> */}
+
+  const handleLogin = (event) => {
+    setValue((values) => ({
+      ...values,
+      errMess: "",
+    }));
+    axios
+      .post("http://localhost:4000/user/login", {
+        email: values.email,
+        password: values.password,
+      })
+      .then((response) => {
+        {
+          console.log(response.data.errCode);
+          if (response.data.errCode == 3) {
+            sessionStorage.setItem(
+              "dataUser",
+              JSON.stringify(response.data.userData)
+            );
+            console.log("dung", response.data);
+            navigate("/");
+            // this.setState({ redirect: true });
+
+            // return <Redirect to="/" />;
+            // <Redirect
+            //   from="http://localhost:3000/login"
+            //   to="http://localhost:3000/"
+            // />;
+          }
+        }
+      })
+      .catch((error) => {
+        {
+          if (error.response) {
+            if (error.response.data) {
+              setValue((values) => ({
+                ...values,
+                errMess: error.response.data,
+              }));
+            }
+          }
+        }
+      });
+  };
+
+  return (
+    <div>
+      <div className="container">
+        <div
+          id="loginbox"
+          className="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"
+        >
+          <div className="row">
+            <div className="col-sm-12" style={{ marginTop: "8em" }}>
+              <a href="/">
+                <img src="img/logo.png" />
+              </a>
             </div>
-            <div className="panel panel-default">
-              <div className="panel-heading">
-                <div className="panel-title text-center">Welcome to us</div>
+          </div>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <div className="panel-title text-center">Welcome to us</div>
+            </div>
+            <div className="panel-body">
+              <div className="input-group">
+                <span className="input-group-addon">
+                  <i className="glyphicon glyphicon-user" />
+                </span>
+                <input
+                  type="email"
+                  onChange={handleEmailChange}
+                  id="inputEmail"
+                  className="form-control"
+                  placeholder="Email address"
+                  required
+                  autofocus
+                />
               </div>
-              <div className="panel-body">
-                <div className="input-group">
-                  <span className="input-group-addon">
-                    <i className="glyphicon glyphicon-user" />
-                  </span>
-                  <input
-                    type="email"
-                    onChange={(event) => {
-                      this.handleEmailChange(event);
-                    }}
-                    id="inputEmail"
-                    className="form-control"
-                    placeholder="Email address"
-                    required
-                    autofocus
-                  />
-                </div>
-                <div className="input-group">
-                  <span className="input-group-addon">
-                    <i className="glyphicon glyphicon-lock" />
-                  </span>
-                  <input
-                    type="password"
-                    onChange={(event) => {
-                      this.handlePasswordChange(event);
-                    }}
-                    id="inputPassword"
-                    className="form-control"
-                    placeholder="Password"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  {/* Button */}
-                  <div className="col-sm-12 controls">
-                    <button
-                      className="btn btn-lg btn-primary btn-block"
-                      onClick={() => {
-                        this.handleLogin();
-                      }}
-                      type="button"
-                    >
-                      <i className="glyphicon glyphicon-log-in" /> Log in
-                    </button>
-                  </div>
+              <div className="input-group">
+                <span className="input-group-addon">
+                  <i className="glyphicon glyphicon-lock" />
+                </span>
+                <input
+                  type="password"
+                  onChange={handlePasswordChange}
+                  id="inputPassword"
+                  className="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <div className="col-12" style={{ color: "red" }}>
+                {/* {this.state.errMess} */}
+              </div>
+              <div className="form-group">
+                {/* Button */}
+                <div className="col-sm-12 controls">
+                  <button
+                    className="btn btn-lg btn-primary btn-block"
+                    onClick={handleLogin}
+                    type="button"
+                  >
+                    <i className="glyphicon glyphicon-log-in" /> Log in
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="particles" />
-        <Footer />
       </div>
-    );
-  }
-}
+      <div id="particles" />
+      <Footer />
+    </div>
+  );
+};
+
+export default Login;

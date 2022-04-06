@@ -9,6 +9,8 @@ const InitialState = {
   id: null,
   data: "CC",
   cart: [],
+  searchData: "",
+  dataShopgird: "CC",
 };
 
 const all = (state = { data: [] }, action) => {
@@ -17,6 +19,14 @@ const all = (state = { data: [] }, action) => {
       return {
         ...state,
         data: action.data,
+      };
+    }
+    case homeTypes.SET_DATA_SEARCH: {
+      console.log("Day LA KQ trong serach", action.payload);
+
+      return {
+        ...state,
+        dataShopgird: action.payload,
       };
     }
     default:

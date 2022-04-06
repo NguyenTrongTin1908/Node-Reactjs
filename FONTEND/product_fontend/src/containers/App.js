@@ -7,17 +7,20 @@ import BillContainer from "./bill.container";
 import DetailContainer from "./detail.container";
 import AboutContainer from "./about.container";
 import LoginContainer from "./login.container";
+import ShopgirdContainer from "./shopgird.container";
 
 const App = () => (
   <Router>
     <Routes>
       <Route exact path="/" element={<HomeContainer />} />
-      <Route exact path="/cart" element={<CartContainer />} />
-      <Route exact path="/checkout" element={<CheckoutContainer />} />
-      <Route exact path="/bill" element={<BillContainer />} />
-      <Route exact path="/about" element={<AboutContainer />} />
+      <Route path="/cart" element={<CartContainer />} />
+      <Route path="/checkout" element={<CheckoutContainer />} />
+      <Route path="/bill" element={<BillContainer />} />
+      <Route path="/about" element={<AboutContainer />} />
       <Route path="/detail/:id" element={<DetailContainer />} />
       <Route path="/login" element={<LoginContainer />} />
+      <Route path="/shopgird" element={<ShopgirdContainer />} />
+      <Route path="/contact" element={<AboutContainer />} />
     </Routes>
   </Router>
 );

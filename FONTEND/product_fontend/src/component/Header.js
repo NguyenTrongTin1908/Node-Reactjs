@@ -5,17 +5,29 @@ import Section from "./Section";
 class Header extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userSession: this.props.userSession,
+    };
   }
+
   render() {
+    const logOut = () => {
+      sessionStorage.removeItem(sessionStorage.removeItem("dataUser"));
+
+      this.setState({
+        userSession: null,
+      });
+    };
+
     return (
       <div>
         {/* Humberger Begin */}
         <div className="humberger__menu__overlay" />
         <div className="humberger__menu__wrapper">
           <div className="humberger__menu__logo">
-            <NavLink to="/">
+            {/* <NavLink to="/">
               <img src="img/logo.png" alt="" />
-            </NavLink>
+            </NavLink> */}
           </div>
           <div className="humberger__menu__cart">
             <ul>
@@ -33,11 +45,39 @@ class Header extends Component {
             </ul>
             <div className="header__cart__price" />
           </div>
-          <div className="humberger__menu__widget"></div>
+          <div class="humberger__menu__widget">
+            <div class="header__top__right__language">
+              {/* <img src="img/language.png" alt="" /> */}
+
+              <div>English</div>
+              <span class="arrow_carrot-down"></span>
+              <ul>
+                <li>
+                  <NavLink to="/cart">
+                    <i className="fa fa-shopping-bag" />{" "}
+                    <span>{this.props.numberCart}</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/cart">
+                    <i className="fa fa-shopping-bag" />{" "}
+                    <span>{this.props.numberCart}</span>
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+            <div class="header__top__right__auth">
+              <NavLink to="/cart">
+                <i className="fa fa-shopping-bag" />{" "}
+                <span>{this.props.numberCart}</span>
+              </NavLink>
+            </div>
+          </div>
+
           <nav className="humberger__menu__nav mobile-menu">
             <ul>
               <li className="active">
-                <NavLink to="/index">Home</NavLink>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
                 <NavLink to="/cart">Shop</NavLink>
@@ -64,16 +104,90 @@ class Header extends Component {
             </ul>
           </nav>
           <div id="mobile-menu-wrap" />
+          <div class="header__top__right__social">
+            <a href="#">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i class="fa fa-linkedin"></i>
+            </a>
+            <a href="#">
+              <i class="fa fa-pinterest-p"></i>
+            </a>
+          </div>
+          <div class="humberger__menu__contact">
+            <ul>
+              <li>
+                <i class="fa fa-envelope"></i>{" "}
+                {this.state.userSession ? this.state.userSession.email : ""}
+              </li>
+              <li>Free Shipping for all Order of $99</li>
+            </ul>
+          </div>
         </div>
         {/* Humberger End */}
         {/* Header Section Begin */}
         <header className="header">
-          <div className="header__top">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-6 col-md-6"></div>
-                <div className="col-lg-6 col-md-6">
-                  <div className="header__top__right"></div>
+          <div class="header__top">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <div class="header__top__left">
+                    <ul>
+                      <li>
+                        <i class="fa fa-envelope"></i>{" "}
+                        {this.state.userSession
+                          ? this.state.userSession.email
+                          : ""}
+                      </li>
+                      <li>Free Shipping for all Order of $99</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="header__top__right">
+                    <div class="header__top__right__social">
+                      <a href="#">
+                        <i class="fa fa-facebook"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-twitter"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-linkedin"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-pinterest-p"></i>
+                      </a>
+                    </div>
+                    <div class="header__top__right__language">
+                      {/* <img src="img/language.png" alt=""> */}
+                      <div>English</div>
+                      <span class="arrow_carrot-down"></span>
+                      <ul>
+                        <li>
+                          <a href="#">Spanis</a>
+                        </li>
+                        <li>
+                          <a href="#">English</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="header__top__right__auth">
+                      {this.state.userSession ? (
+                        <NavLink to="/" onClick={logOut}>
+                          <i class="fa fa-user"> </i>Logout
+                        </NavLink>
+                      ) : (
+                        <NavLink to="/login">
+                          <i class="fa fa-user"> </i>Login
+                        </NavLink>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -82,7 +196,7 @@ class Header extends Component {
             <div className="row">
               <div className="col-lg-3">
                 <div className="header__logo">
-                  <NavLink to="/index">
+                  <NavLink to="/">
                     <img src="img/logo.png" alt="" />
                   </NavLink>
                 </div>
@@ -91,7 +205,7 @@ class Header extends Component {
                 <nav className="header__menu">
                   <ul>
                     <li className="active">
-                      <NavLink to="/index">Home</NavLink>
+                      <NavLink to="/">Home</NavLink>
                     </li>
                     <li>
                       <NavLink to="/cart">Shop</NavLink>

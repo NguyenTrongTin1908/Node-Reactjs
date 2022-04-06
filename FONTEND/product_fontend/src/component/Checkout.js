@@ -119,16 +119,20 @@ export default class Checkout extends Component {
                       <div className="checkout__order__products">
                         Products <span>Total</span>
                       </div>
-                      {this.props.dataCart.cartStore.map((element, index) => {
-                        return (
-                          <ul>
-                            <li>
-                              {element.name}
-                              <span>{element.price * element.quantity}</span>
-                            </li>
-                          </ul>
-                        );
-                      })}
+                      {this.props.dataCart ? (
+                        this.props.dataCart.cartStore.map((element, index) => {
+                          return (
+                            <ul>
+                              <li>
+                                {element.name}
+                                <span>{element.price * element.quantity}</span>
+                              </li>
+                            </ul>
+                          );
+                        })
+                      ) : (
+                        <div></div>
+                      )}
 
                       <div className="checkout__order__subtotal">
                         Subtotal <span>{this.props.subtotal}</span>

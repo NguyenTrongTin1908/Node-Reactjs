@@ -2,6 +2,7 @@ export const homeTypes = {
   SET_ALL_PRODUCT: "SET_ALL_PRODUCT",
   SET_DETAIL_PRODUCT: "SET_DETAIL_PRODUCT",
   SET_HOBBY: "SET_HOBBY",
+  SET_DATA_SEARCH: "SET_DATA_SEARCH",
 };
 
 export const productTypes = {
