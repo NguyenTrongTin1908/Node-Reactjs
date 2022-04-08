@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 import Searchbar from "./Searchbar";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import * as homeActions from "../actions/home.action";
+import { bindActionCreators } from "redux";
 
+import { dispatch } from "react-router-dom";
 class Section extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    const handleFiller = () => {
+      this.props.homeActions.getData();
+    };
     return (
       <section className="hero">
         <div className="container">
@@ -15,28 +26,68 @@ class Section extends Component {
                 </div>
                 <ul>
                   <li>
-                    <a href="/shopgird?filter=Thịt">Fresh Meat</a>
+                    <NavLink
+                      to="/shopgird?filter=thit"
+                      onClick={(event) => handleFiller(event.target.value)}
+                    >
+                      Fresh Meat
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="/shopgird?filter=raucu">Vegetables</a>
+                    <NavLink
+                      to="/shopgird?filter=raucu"
+                      onClick={(event) => handleFiller(event.target.value)}
+                    >
+                      Vegetables
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="/shopgird?filter=traicay">Fresh Fruits</a>
+                    <NavLink
+                      to="/shopgird?filter=traicay"
+                      onClick={(event) => handleFiller(event.target.value)}
+                    >
+                      Fresh Fruits
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="/shopgird?filter=haisan">Ocean Foods</a>
+                    <NavLink
+                      to="/shopgird?filter=haisan"
+                      onClick={(event) => handleFiller(event.target.value)}
+                    >
+                      Ocean Foods
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="/shopgird?filter=doanlien">Fastfood</a>
+                    <NavLink
+                      to="/shopgird?filter=doanlien"
+                      onClick={(event) => handleFiller(event.target.value)}
+                    >
+                      Fastfood
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="/shopgird?filter=nuoc">Drinks</a>
+                    <NavLink
+                      to="/shopgird?filter=nuoc"
+                      onClick={(event) => handleFiller(event.target.value)}
+                    >
+                      Drinks
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="/shopgird?filter=sua">Milk</a>
+                    <NavLink
+                      to="/shopgird?filter=sua"
+                      onClick={(event) => handleFiller(event.target.value)}
+                    >
+                      Milk
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="/shopgird?filter=banhkeo">Candy</a>
+                    <NavLink
+                      to="/shopgird?filter=banhkeo"
+                      onClick={(event) => handleFiller(event.target.value)}
+                    >
+                      Candy
+                    </NavLink>
                   </li>
                 </ul>
               </div>
@@ -67,9 +118,9 @@ class Section extends Component {
                     100% Organic
                   </h2>
                   <p>Free Pickup and Delivery Available</p>
-                  <a href="/shop-grid" className="primary-btn">
+                  <NavLink to="/shop-grid" className="primary-btn">
                     SHOP NOW
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -80,4 +131,13 @@ class Section extends Component {
   }
 }
 
-export default Section;
+const mapStateToProps = (state) => ({
+  data: state.homeReducers.all.data,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    homeActions: bindActionCreators(homeActions, dispatch),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Section);

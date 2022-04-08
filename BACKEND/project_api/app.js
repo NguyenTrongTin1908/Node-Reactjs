@@ -24,7 +24,7 @@ app.use(cors());
 //   res.render('error');
 // });
 
-// userRoute(app);
+userRoute(app);
 // detailRoute(app);
 
 indexRoute(app);

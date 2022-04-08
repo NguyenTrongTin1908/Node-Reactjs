@@ -12,9 +12,16 @@ import { ObjectId } from "mongodb";
 
 import userController from "../controller/userController.js";
 
-const userRoute = express.Router();
-
 /* GET users listing. */
 router.post("/login", userController.handleLogin);
+router.post("/register", userController.handleRegister);
 
-export { router as userRoute };
+const userRoute = (app) => {
+  app.route("/login").post(userController.handleLogin);
+  app.route("/register").post(userController.handleRegister);
+  // .post(indexController.addProduct)
+  // .put(indexController.updateProduct)
+  // .delete(indexController.deleteProduct);
+};
+
+export { userRoute };

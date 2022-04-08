@@ -32,7 +32,7 @@ class HomeContainer extends React.Component {
     // console.log("SE la ", session);
     const data = this.props;
     sessionStorage.setItem("dataProduct", JSON.stringify(data));
-    const userSession = getSessionStorageOrDefault("dataUser", "cart");
+    const userSession = getSessionStorageOrDefault("dataUser", "");
 
     if (data != null && userSession != null) {
       return (

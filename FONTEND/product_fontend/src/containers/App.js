@@ -8,6 +8,7 @@ import DetailContainer from "./detail.container";
 import AboutContainer from "./about.container";
 import LoginContainer from "./login.container";
 import ShopgirdContainer from "./shopgird.container";
+import RegisterContainer from "./register.container";
 
 const App = () => (
   <Router>
@@ -19,6 +20,8 @@ const App = () => (
       <Route path="/about" element={<AboutContainer />} />
       <Route path="/detail/:id" element={<DetailContainer />} />
       <Route path="/login" element={<LoginContainer />} />
+      <Route path="/register" element={<RegisterContainer />} />
+
       <Route path="/shopgird" element={<ShopgirdContainer />} />
       <Route path="/contact" element={<AboutContainer />} />
     </Routes>

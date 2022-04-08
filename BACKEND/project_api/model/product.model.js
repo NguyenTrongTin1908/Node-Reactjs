@@ -75,6 +75,6 @@ const productSchema = mongoose.Schema({
   },
 });
 productSchema.plugin(mongoosePaginate);
-const productModel = mongoose.model("sanpham", productSchema);
+const productModel = mongoose.model("product", productSchema);
 export { productModel };
 // sub :         table nè : name title, json (schema);

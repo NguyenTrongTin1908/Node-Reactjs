@@ -65,6 +65,8 @@ import indexController from "../controller/indexController.js";
 const indexRoute = (app) => {
   app.route("/allProduct").get(indexController.getAllProduct);
   app.route("/product/:id").get(indexController.getDetailProduct);
+  app.route("/search").get(indexController.searchProduct);
+  app.route("/filler").get(indexController.fillerProduct);
   // .post(indexController.addProduct)
   // .put(indexController.updateProduct)
   // .delete(indexController.deleteProduct);

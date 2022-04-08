@@ -13,11 +13,13 @@ class Header extends Component {
   render() {
     const logOut = () => {
       sessionStorage.removeItem(sessionStorage.removeItem("dataUser"));
+      // sessionStorage.removeItem(sessionStorage.removeItem("dataUser"));
 
       this.setState({
         userSession: null,
       });
     };
+    console.log("USER LA", this.state.userSession);
 
     return (
       <div>

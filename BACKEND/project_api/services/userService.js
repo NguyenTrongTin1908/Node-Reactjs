@@ -2,6 +2,7 @@
 import express from "express";
 import { Router } from "express";
 import { ObjectId } from "mongodb";
+import bcrypt from "bcryptjs";
 import mongodb from "mongoose";
 
 // connect mongodb
@@ -13,16 +14,17 @@ let handleUserLogin = (email, password) => {
   return new Promise(async (resolve, reject) => {
     try {
       let userData = [];
-      let isExist = await checkUserEmail(email);
-      if (isExist) {
-        let checkpassword = await userModel.findOne({
-          password: password,
-        });
+      let user = await checkUserEmail(email);
+      console.log("CHECK USER", user);
+      if (user) {
+        const checkPassword = await bcrypt.compare(password, user.password);
+        console.log("CHECK PASSWORD", checkPassword);
 
-        if (checkpassword) {
+        if (checkPassword) {
           userData.errCode = 3;
           userData.errMessage = "Success";
-          userData.data = checkpassword;
+          userData.password = password;
+          userData.user = user;
           resolve(userData);
         } else {
           userData.errCode = 2;

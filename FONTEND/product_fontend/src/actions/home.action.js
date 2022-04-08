@@ -39,13 +39,13 @@ const setResultSearch = (data) => ({
   payload: data,
 });
 
-export const searchProduct = (searchKey) => async (dispatch, getState) => {
+export const searchProduct = (Key) => async (dispatch, getState) => {
   let res;
 
-  console.log("searchKey la ", searchKey);
+  console.log("searchKey la ", Key.searchKey);
   try {
     res = await axios.get(
-      "http://localhost:4000/searchProduct?searchKey=" + searchKey.filter
+      "http://localhost:4000/search?searchKey=" + Key.filter
     );
   } catch (err) {
     return err;
@@ -54,6 +54,20 @@ export const searchProduct = (searchKey) => async (dispatch, getState) => {
   dispatch(setResultSearch(res.data));
 };
 
+export const fillerProduct = (Key) => async (dispatch, getState) => {
+  let res;
+
+  console.log("searchKey la ", Key);
+  try {
+    res = await axios.get(
+      "http://localhost:4000/filler?fillerKey=" + Key.filter
+    );
+  } catch (err) {
+    return err;
+  }
+
+  dispatch(setResultSearch(res.data));
+};
 // export const getDetailProduct = (id) => {
 //   console.log("Day LA KQ Trong detail ");
 //   return {

@@ -54,7 +54,7 @@ const Login = (props) => {
       errMess: "",
     }));
     axios
-      .post("http://localhost:4000/user/login", {
+      .post("http://localhost:4000/login", {
         email: values.email,
         password: values.password,
       })

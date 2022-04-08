@@ -30,6 +30,40 @@ const getDetailProduct = async (req, res) => {
 
   res.send(data);
 };
+
+const delProduct = async (req, res) => {
+  let idObject = new ObjectId(req.params.id);
+  const data = await productModel.findByIdAndDelete({
+    _id: idObject,
+  });
+
+  res.send(data);
+  console.log("DaTA :", data);
+};
+
+const searchProduct = async (req, res) => {
+  var key = req.query.searchKey || "";
+
+  console.log("key la ", key);
+  let data = null;
+
+  data = await productModel.find({ maloaisp: { $regex: key } });
+
+  if (!data) {
+    data = await productModel.find({ tensp: { $regex: key } });
+  }
+  res.send(data);
+};
+
+const fillerProduct = async (req, res) => {
+  var key = req.query.fillerKey || "";
+
+  console.log("key la ", key);
+  // var querysearchbar = `"\" + ${key} + \""`;
+  const data = await productModel.find({ maloaisp: { $regex: key } });
+
+  res.send(data);
+};
 // const index_controller = {
 //   getAllProduct: async (req, res) => {
 //     const data = await productModel.find({
@@ -72,4 +106,10 @@ const getDetailProduct = async (req, res) => {
 // };
 
 // export default { index_controller };
-export default { getAllProduct, getDetailProduct };
+export default {
+  getAllProduct,
+  getDetailProduct,
+  delProduct,
+  searchProduct,
+  fillerProduct,
+};
