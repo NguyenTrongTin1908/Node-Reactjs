@@ -2,7 +2,7 @@ import express from "express";
 import { Router } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import { indexRoute } from "./routes/indexRoute.js";
+import indexRoute from "./routes/indexRoute.js";
 import { detailRoute } from "./routes/detailRoute.js";
 import { userRoute } from "./routes/usersRoute.js";
 const app = express();
@@ -22,12 +22,15 @@ app.use(cors());
 //   // render the error page
 //   res.status(err.status || 500);
 //   res.render('error');
+
 // });
 
+// app.use("/api/user",userRoute)
 userRoute(app);
 // detailRoute(app);
+app.use("/api/index", indexRoute);
 
-indexRoute(app);
+// indexRoute(app);
 
 app.listen(4000);
 

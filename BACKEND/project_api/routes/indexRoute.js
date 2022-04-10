@@ -6,8 +6,10 @@
 // import mongodb from "mongoose";
 // import * as pg from "pg";
 // const { Pool } = pg.default;
-// const router = express.Router();
-// // const DB_MONGO = require('./app/config/db.config')
+import express from "express";
+
+const router = express.Router();
+// // const DB_MONGO = require('./router/config/db.config')
 // import("dotenv/config");
 
 // import { ObjectId } from "mongodb";
@@ -62,16 +64,23 @@
 
 import indexController from "../controller/indexController.js";
 
-const indexRoute = (app) => {
-  app.route("/allProduct").get(indexController.getAllProduct);
-  app.route("/product/:id").get(indexController.getDetailProduct);
-  app.route("/search").get(indexController.searchProduct);
-  app.route("/filler").get(indexController.fillerProduct);
-  // .post(indexController.addProduct)
-  // .put(indexController.updateProduct)
-  // .delete(indexController.deleteProduct);
-};
+// const indexRoute = (router) => {
+//   router
+//     .route("/allProduct")
+//     .get(indexController.Test, indexController.getAllProduct);
+//   router.route("/product/:id").get(indexController.getDetailProduct);
+//   router.route("/search").get(indexController.searchProduct);
+//   router.route("/filler").get(indexController.fillerProduct);
+//   // .post(indexController.addProduct)
+//   // .put(indexController.updateProduct)
+//   // .delete(indexController.deleteProduct);
+// };
 
-console.log("KIEU LA", typeof indexController.getAllProduct);
+router.route("/allProduct").get(indexController.getAllProduct);
+router.route("/product/:id").get(indexController.getDetailProduct);
+router.route("/search").get(indexController.searchProduct);
+router.route("/filler").get(indexController.fillerProduct);
 
-export { indexRoute };
+// console.log("KIEU LA", typeof indexController.getAllProduct);
+
+export default router;

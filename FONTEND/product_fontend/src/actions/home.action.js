@@ -9,7 +9,7 @@ export const getData = () => async (dispatch, getState) => {
   let res;
   console.log("Day LA KQ Trong detail ");
   try {
-    res = await axios.get("http://localhost:4000/allProduct");
+    res = await axios.get("http://localhost:4000/api/index/allProduct");
   } catch (err) {
     return err;
   }

@@ -12,17 +12,27 @@ import { ObjectId } from "mongodb";
 import { productModel } from "../model/product.model.js";
 import { cartModel } from "../model/cart.model.js";
 
-const getAllProduct = async (req, res) => {
+const Test = async (req, res, next) => {
+  console.log("a");
+  next();
+};
+
+const getAllProduct = async (req, res, next) => {
   const data = await productModel.find({
     trangthai: "con",
   });
 
-  console.log("DATA LA", data);
+  console.log("xuat data");
 
   res.send(data);
 };
 
-const getDetailProduct = async (req, res) => {
+// const st= async (req, res, next) => {
+//   next();
+// },
+//   async (req, res, next) => {};
+
+const getDetailProduct = async (req, res, next) => {
   let idObject = new ObjectId(req.params.id);
   const data = await productModel.find({
     _id: idObject,
@@ -112,4 +122,5 @@ export default {
   delProduct,
   searchProduct,
   fillerProduct,
+  Test,
 };
