@@ -46,7 +46,6 @@ let handleUserLogin = (email, password) => {
 
 let checkUserEmail = (userEmail) => {
   return new Promise(async (resolve, reject) => {
-    console.log("email : ", userEmail);
     try {
       let user = await userModel.findOne({
         email: userEmail,

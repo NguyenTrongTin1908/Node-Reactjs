@@ -7,6 +7,7 @@ import { createLogger } from "redux-logger";
 import App from "./containers/App";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
+import mongoose from "mongoose";
 const middleware = [thunk];
 
 if (process.env.NODE_ENV !== "production") {

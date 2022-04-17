@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import Header from "./Header";
+import { connect } from "react-redux";
+import * as homeActions from "../actions/home.action";
 
-export default class Bill extends Component {
+import { bindActionCreators } from "redux";
+import Header from "./Header";
+// import homeActions from "../actions/home.action";
+
+class Bill extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+    const handleBill = (event) => {};
     return (
       <div>
         <Header />
@@ -52,7 +62,6 @@ export default class Bill extends Component {
                         <div className="checkout__order__total">
                           Total <span>{this.props.total}</span>
                         </div>
-
                         {/* <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
@@ -77,3 +86,12 @@ export default class Bill extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  homeActions: bindActionCreators(homeActions, dispatch),
+});
+
+const mapStateToProps = (state) => ({
+  data: state.cartReducers.cart,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Bill);

@@ -54,7 +54,7 @@ const Login = (props) => {
       errMess: "",
     }));
     axios
-      .post("http://localhost:4000/login", {
+      .post("http://localhost:4000/api/user/login", {
         email: values.email,
         password: values.password,
       })
@@ -68,13 +68,6 @@ const Login = (props) => {
             );
             console.log("dung", response.data);
             navigate("/");
-            // this.setState({ redirect: true });
-
-            // return <Redirect to="/" />;
-            // <Redirect
-            //   from="http://localhost:3000/login"
-            //   to="http://localhost:3000/"
-            // />;
           }
         }
       })
@@ -103,18 +96,18 @@ const Login = (props) => {
             <div className="col-sm-12" style={{ marginTop: "8em" }}>
               <a href="/">
                 <img src="img/logo.png" />
-              </a>
-            </div>
-          </div>
+              </a>{" "}
+            </div>{" "}
+          </div>{" "}
           <div className="panel panel-default">
             <div className="panel-heading">
-              <div className="panel-title text-center">Welcome to us</div>
-            </div>
+              <div className="panel-title text-center"> Welcome to us </div>{" "}
+            </div>{" "}
             <div className="panel-body">
               <div className="input-group">
                 <span className="input-group-addon">
                   <i className="glyphicon glyphicon-user" />
-                </span>
+                </span>{" "}
                 <input
                   type="email"
                   onChange={handleEmailChange}
@@ -124,11 +117,11 @@ const Login = (props) => {
                   required
                   autofocus
                 />
-              </div>
+              </div>{" "}
               <div className="input-group">
                 <span className="input-group-addon">
                   <i className="glyphicon glyphicon-lock" />
-                </span>
+                </span>{" "}
                 <input
                   type="password"
                   onChange={handlePasswordChange}
@@ -137,12 +130,14 @@ const Login = (props) => {
                   placeholder="Password"
                   required
                 />
-              </div>
+              </div>{" "}
               <div className="col-12" style={{ color: "red" }}>
-                {/* {this.state.errMess} */}
-              </div>
+                {" "}
+                {/* {this.state.errMess} */}{" "}
+              </div>{" "}
               <div className="form-group">
-                {/* Button */}
+                {" "}
+                {/* Button */}{" "}
                 <div className="col-sm-12 controls">
                   <button
                     className="btn btn-lg btn-primary btn-block"
@@ -150,13 +145,13 @@ const Login = (props) => {
                     type="button"
                   >
                     <i className="glyphicon glyphicon-log-in" /> Log in
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                  </button>{" "}
+                </div>{" "}
+              </div>{" "}
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
+      </div>{" "}
       <div id="particles" />
       <Footer />
     </div>

@@ -26,7 +26,7 @@ export const getDetailProduct = (id) => async (dispatch, getState) => {
   let res;
   // let id = "621cc3770e2e414294d12001";
   try {
-    res = await axios.get("http://localhost:4000/product/" + id);
+    res = await axios.get("http://localhost:4000/api/index/product/" + id);
   } catch (err) {
     return err;
   }
@@ -45,7 +45,7 @@ export const searchProduct = (Key) => async (dispatch, getState) => {
   console.log("searchKey la ", Key.searchKey);
   try {
     res = await axios.get(
-      "http://localhost:4000/search?searchKey=" + Key.filter
+      "http://localhost:4000/api/index/search?searchKey=" + Key.filter
     );
   } catch (err) {
     return err;
@@ -60,7 +60,7 @@ export const fillerProduct = (Key) => async (dispatch, getState) => {
   console.log("searchKey la ", Key);
   try {
     res = await axios.get(
-      "http://localhost:4000/filler?fillerKey=" + Key.filter
+      "http://localhost:4000/api/index/filler?fillerKey=" + Key.filter
     );
   } catch (err) {
     return err;
@@ -100,3 +100,20 @@ export const actionLogin = (email, password) => async (dispatch, getState) => {
       console.log(error);
     });
 };
+
+export function Bill(data) {
+  console.log("trong bill ", data);
+
+  axios
+    .post("http://localhost:4000/api/index/bill", {
+      account: data.account,
+      bill: data.bill,
+      info: data.info,
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}

@@ -11,11 +11,7 @@ import { ObjectId } from "mongodb";
 
 import { productModel } from "../model/product.model.js";
 import { cartModel } from "../model/cart.model.js";
-
-const Test = async (req, res, next) => {
-  console.log("a");
-  next();
-};
+import { billModel } from "../model/bill.model.js";
 
 const getAllProduct = async (req, res, next) => {
   const data = await productModel.find({
@@ -54,12 +50,14 @@ const delProduct = async (req, res) => {
 const searchProduct = async (req, res) => {
   var key = req.query.searchKey || "";
 
-  console.log("key la ", key);
+  console.log("keySearch la ", key);
   let data = null;
 
   data = await productModel.find({ maloaisp: { $regex: key } });
 
-  if (!data) {
+  console.log("data file la ", data.length);
+
+  if (data.length == 0) {
     data = await productModel.find({ tensp: { $regex: key } });
   }
   res.send(data);
@@ -74,46 +72,45 @@ const fillerProduct = async (req, res) => {
 
   res.send(data);
 };
-// const index_controller = {
-//   getAllProduct: async (req, res) => {
-//     const data = await productModel.find({
-//       trangthai: "con",
-//     });
 
-//     res.send(data);
-//   },
-// getDetailProduct: (req, res) => {
-//   let sql = "SELECT * FROM products WHERE id = ?";
-//   db.query(sql, [req.params.productId], (err, response) => {
-//     if (err) throw err;
-//     res.json(response[0]);
-//   });
-// },
-// updateProduct: (req, res) => {
-//   let data = req.body;
-//   let productId = req.params.productId;
-//   let sql = "UPDATE products SET ? WHERE id = ?";
-//   db.query(sql, [data, productId], (err, response) => {
-//     if (err) throw err;
-//     res.json({ message: "Update success!" });
-//   });
-// },
-// addProduct: (req, res) => {
-//   let data = req.body;
-//   let sql = "INSERT INTO products SET ?";
-//   db.query(sql, [data], (err, response) => {
-//     if (err) throw err;
-//     res.json({ message: "Insert success!" });
-//   });
-// },
-// deleteProduct: (req, res) => {
-//   let sql = "DELETE FROM products WHERE id = ?";
-//   db.query(sql, [req.params.productId], (err, response) => {
-//     if (err) throw err;
-//     res.json({ message: "Delete success!" });
-//   });
-// },
-// };
+const detailProduct = async (req, res) => {
+  let idObject = new ObjectId(req.params.id);
+  const data = await productModel.find({
+    _id: idObject,
+  });
+
+  res.send(data);
+  console.log("DaTA :", data);
+};
+
+const saveBill = async (req, res) => {
+  console.log("da");
+  var account = req.body.account;
+  var billInfo = req.body.bill;
+  var info = req.body.info;
+  // console.log("saveBill : ");
+
+  const user = await billModel.findOne({ email: account.email });
+
+  console.log("User la ", user);
+
+  // console.log(req.body.account);
+  console.log(req.body.bill);
+  // console.log(req.body.info);
+
+  const bill = new billModel({
+    name: info._name,
+    phone: info._phone,
+    address: info._address,
+    user: user._id,
+    total_payment: billInfo.total,
+  });
+
+  try {
+    const newBill = await bill.save();
+    res.send(newBill);
+  } catch (error) {}
+};
 
 // export default { index_controller };
 export default {
@@ -122,5 +119,6 @@ export default {
   delProduct,
   searchProduct,
   fillerProduct,
-  Test,
+  detailProduct,
+  saveBill,
 };

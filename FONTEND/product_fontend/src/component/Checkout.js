@@ -1,8 +1,62 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Header from "./Header";
+import { connect } from "react-redux";
+import * as homeActions from "../actions/home.action";
+import { Bill } from "../actions/home.action";
+import { Redirect } from "react-router-dom";
 
-export default class Checkout extends Component {
+import { bindActionCreators } from "redux";
+
+function getSessionStorageOrDefault(key, defaultValue) {
+  const stored = sessionStorage.getItem(key);
+  if (!stored) {
+    return defaultValue;
+  }
+  return JSON.parse(stored);
+}
+
+class Checkout extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      _name: "",
+      _address: "",
+
+      _phone: "",
+    };
+  }
+
+  componentWillMount() {
+    // console.log("ID la ", user.email);
+    // const navigate = useNavigate();
+    // console.log("Data la ", this.props);
+  }
+  // handleBill = (event) => {};
+
+  submitForm = (event) => {
+    const user = getSessionStorageOrDefault("dataUser", "");
+
+    let data = {
+      info: this.state,
+      account: user,
+      bill: this.props,
+    };
+
+    event.preventDefault();
+    Bill(data);
+    this.props.history.push("/bill");
+  };
+
+  isChange = (event) => {
+    const ten = event.target.name;
+    const giatri = event.target.value;
+
+    this.setState({
+      [ten]: giatri,
+    });
+  };
   render() {
     return (
       <div>
@@ -19,31 +73,21 @@ export default class Checkout extends Component {
             </div>
             <div className="checkout__form">
               <h4>Billing Details</h4>
-              <form action="/bill" method="POST">
+              <form>
                 <div className="row">
                   <div className="col-lg-8 col-md-6">
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="checkout__input">
                           <p>
-                            Fist Name<span>*</span>
+                            Name<span>*</span>
                           </p>
                           <input
+                            onChange={(event) => this.isChange(event)}
                             type="text"
-                            name="first_name"
+                            name="_name"
+                            placeholder="Name"
                             className="first_name"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-6">
-                        <div className="checkout__input">
-                          <p>
-                            Last Name<span>*</span>
-                          </p>
-                          <input
-                            type="text"
-                            name="last_name"
-                            className="last_name"
                           />
                         </div>
                       </div>
@@ -58,60 +102,29 @@ export default class Checkout extends Component {
                       </p>
                       <input
                         type="text"
-                        placeholder="Street Address"
+                        onChange={(event) => this.isChange(event)}
+                        placeholder="Address"
                         className="checkout__input__add"
-                        name="street_address"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Apartment, suite, unite ect (optinal)"
-                        name="apartment_address"
-                        className="apartment_address"
+                        name="_address"
                       />
                     </div>
-                    {/* <div class="checkout__input">
-                                <p>Town/City<span>*</span></p>
-                                <input type="text">
-                            </div> */}
-                    {/* <div class="checkout__input">
-                                <p>Country/State<span>*</span></p>
-                                <input type="text">
-                            </div> */}
-                    {/* <div class="checkout__input">
-                                <p>Postcode / ZIP<span>*</span></p>
-                                <input type="text">
-                            </div> */}
+
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="checkout__input">
                           <p>
                             Phone<span>*</span>
                           </p>
-                          <input type="text" name="phone" className="phone" />
-                        </div>
-                      </div>
-                      <div className="col-lg-6">
-                        <div className="checkout__input">
-                          <p>
-                            Email<span>*</span>
-                          </p>
-                          <input type="text" name="email" className="email" />
+                          <input
+                            type="text"
+                            onChange={(event) => this.isChange(event)}
+                            name="_phone"
+                            className="phone"
+                            placeholder="Phone"
+                          />
                         </div>
                       </div>
                     </div>
-                    {/* <p>Create an account by entering the information below. If you are a returning customer
-                                please login at the top of the page</p>
-                  <div class="checkout__input">
-                                <p>Account Password<span>*</span></p>
-                                <input type="text">
-                            </div>
-                  <div class="checkout__input__checkbox">
-                                <label for="diff-acc">
-                                    Ship to a different address?
-                                    <input type="checkbox" id="diff-acc">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div> */}
                   </div>
                   <div className="col-lg-4 col-md-6">
                     <div className="checkout__order">
@@ -133,7 +146,6 @@ export default class Checkout extends Component {
                       ) : (
                         <div></div>
                       )}
-
                       <div className="checkout__order__subtotal">
                         Subtotal <span>{this.props.subtotal}</span>
                         <br />
@@ -144,7 +156,6 @@ export default class Checkout extends Component {
                       <div className="checkout__order__total">
                         Total <span>{this.props.total}</span>
                       </div>
-
                       {/* // <div class="checkout__input__checkbox">
                     //                 <label for="acc-or">
                     //                     Create an account?
@@ -157,9 +168,18 @@ export default class Checkout extends Component {
                         do eiusmod tempor incididunt ut labore et dolore magna
                         aliqua.
                       </p>
-                      <NavLink to="/bill" className="primary-btn cart-btn">
+                      {/* <NavLink
+                        to="/bill"
+                        className="primary-btn cart-btn"
+                      ></NavLink> */}
+                      <button
+                        className="primary-btn cart-btn"
+                        onClick={(event) => this.submitForm(event)}
+                        type="submit"
+                      >
+                        <i className />
                         Place Order
-                      </NavLink>
+                      </button>{" "}
                     </div>
                   </div>
                 </div>
@@ -171,3 +191,12 @@ export default class Checkout extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  Bill: (item) => dispatch(Bill(item)),
+});
+
+const mapStateToProps = (state) => ({
+  data: state.cartReducers.cart,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

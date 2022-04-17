@@ -6,6 +6,7 @@ import Bill from "../component/Bill";
 import Loading from "../component/loading/loading";
 import { sortTypes } from "../constants/action.types";
 import localStore from "../config/storage.config";
+import * as homeActions from "../actions/home.action";
 
 import { useState } from "react";
 
