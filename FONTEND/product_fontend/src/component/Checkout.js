@@ -46,7 +46,7 @@ class Checkout extends Component {
 
     event.preventDefault();
     Bill(data);
-    this.props.history.push("/bill");
+    // this.props.history.push("/bill");
   };
 
   isChange = (event) => {

@@ -23,11 +23,6 @@ const getAllProduct = async (req, res, next) => {
   res.send(data);
 };
 
-// const st= async (req, res, next) => {
-//   next();
-// },
-//   async (req, res, next) => {};
-
 const getDetailProduct = async (req, res, next) => {
   let idObject = new ObjectId(req.params.id);
   const data = await productModel.find({
@@ -80,11 +75,9 @@ const detailProduct = async (req, res) => {
   });
 
   res.send(data);
-  console.log("DaTA :", data);
 };
 
 const saveBill = async (req, res) => {
-  console.log("da");
   var account = req.body.account;
   var billInfo = req.body.bill;
   var info = req.body.info;
@@ -92,10 +85,7 @@ const saveBill = async (req, res) => {
 
   const user = await billModel.findOne({ email: account.email });
 
-  console.log("User la ", user);
-
   // console.log(req.body.account);
-  console.log(req.body.bill);
   // console.log(req.body.info);
 
   const bill = new billModel({

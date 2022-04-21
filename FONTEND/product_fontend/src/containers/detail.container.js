@@ -35,7 +35,7 @@ const DetailContainer = (props) => {
 
   return (
     <div>
-      {deta !== "CC" ? (
+      {deta !== "" ? (
         <div>
           <Detail data={deta} />{" "}
         </div>

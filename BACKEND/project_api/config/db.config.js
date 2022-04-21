@@ -8,6 +8,11 @@ import { ObjectId } from "mongodb";
 
 // // connect mongodb
 
-await mongoosedb.connect("mongodb://localhost:27017/local", {});
+const dbHost = process.env.DB_HOST || "localhost";
+const dbPort = process.env.DB_PORT || 27017;
+const dbName = process.env.DB_NAME || "local";
+const mongoUrl = `mongodb://${dbHost}:${dbPort}/${dbName}`;
+
+await mongoosedb.connect(mongoUrl, {});
 
 export default { mongoosedb };

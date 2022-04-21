@@ -55,7 +55,7 @@ class Home extends Component {
                               </li>
                             </ul>
                           </div>
-                          <div class="product__discount__item__text" id="CC">
+                          <div class="product__discount__item__text" id="AA">
                             <span>{element.chitiet}</span>
                             <h5 style={{ fontSize: `17px` }}>
                               <a href={"/details/" + element._id}></a>
@@ -90,7 +90,7 @@ class Home extends Component {
                     <li className="active" data-filter="*">
                       All
                     </li>
-                    <li data-filter=".oranges" id="CC">
+                    <li data-filter=".oranges" id="AA">
                       Oranges
                     </li>
                     <li data-filter=".fresh-meat">Fresh Meat</li>
@@ -142,7 +142,7 @@ class Home extends Component {
         {/* Blog Section End */}
 
         <script>
-          let elm=document.getElementById("CC") elm.style.color="#0174DF"
+          let elm=document.getElementById("AA") elm.style.color="#0174DF"
         </script>
       </div>
     );

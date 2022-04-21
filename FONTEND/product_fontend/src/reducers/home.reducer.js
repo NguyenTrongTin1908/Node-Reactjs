@@ -7,10 +7,10 @@ const InitialState = {
   numberCart: "1",
   activeId: null,
   id: null,
-  data: "CC",
+  data: "",
   cart: [],
   searchData: "",
-  dataShopgird: "CC",
+  dataShopgird: "",
 };
 
 const all = (state = { data: [] }, action) => {
