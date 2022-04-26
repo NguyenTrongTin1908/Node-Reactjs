@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as homeActions from "../actions/home.action";
 import { bindActionCreators } from "redux";
+import bg from "./register/banner.jpg";
 
 import { dispatch } from "react-router-dom";
 class Section extends Component {
@@ -108,19 +109,26 @@ class Section extends Component {
                 </div>
               </div>
               <div
-                className="hero__item set-bg"
-                data-setbg="img/hero/banner.jpg"
+                class="hero__item set-bg"
+                style={{ backgroundImage: "url(" + bg + ")" }}
               >
-                <div className="hero__text">
+                {/* <div
+                class="hero__item set-bg"
+                style={{
+                  backgroundImage: `url(require("https://timviec365.net/upload/images/phong-van-noi.jpg")
+                                .default)`,
+                }}
+              > */}
+                <div class="hero__text">
                   <span>FRUIT FRESH</span>
                   <h2>
                     Vegetable <br />
                     100% Organic
                   </h2>
                   <p>Free Pickup and Delivery Available</p>
-                  <NavLink to="/shop-grid" className="primary-btn">
+                  <a href="/shopgird" class="primary-btn">
                     SHOP NOW
-                  </NavLink>
+                  </a>
                 </div>
               </div>
             </div>
