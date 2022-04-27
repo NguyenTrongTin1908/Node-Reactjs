@@ -3,7 +3,6 @@ import { Router } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import indexRoute from "./routes/indexRoute.js";
-import { detailRoute } from "./routes/detailRoute.js";
 import userRoute from "./routes/usersRoute.js";
 const app = express();
 app.use(express.json());
